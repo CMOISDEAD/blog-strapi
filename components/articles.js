@@ -10,7 +10,7 @@ const Articles = ({ articles }) => {
 		<div>
 			<div className="uk-child-width-1-2@s" data-uk-grid="true">
 				<div>
-					{leftArticles.map((article, i) => {
+					{leftArticles.map((article, _i) => {
 						return (
 							<Card
 								article={article}
@@ -24,7 +24,7 @@ const Articles = ({ articles }) => {
 						className="uk-child-width-1-2@m uk-grid-match"
 						data-uk-grid={true}
 					>
-						{rightArticles.map((article, i) => {
+						{rightArticles.map((article, _i) => {
 							return (
 								<Card
 									article={article}
