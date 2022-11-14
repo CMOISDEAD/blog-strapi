@@ -1,15 +1,18 @@
 import Moment from "react-moment";
-// import ReactMarkdown from "react-markdown";
 import parse from "html-react-parser";
-
 import Seo from "../../components/seo";
 import Layout from "../../components/layout";
-
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 
 const Article = ({ article, categories }) => {
 	const imageUrl = getStrapiMedia(article.attributes.image);
+
+	const headerStyle = {
+		background: `url(${imageUrl}) center fixed`,
+		backgroundRepeat: "no-repeat",
+		backgroundSize: "cover",
+	};
 
 	const seo = {
 		metaTitle: article.attributes.title,
@@ -18,61 +21,50 @@ const Article = ({ article, categories }) => {
 		article: true,
 	};
 
-	// console.log(article.attributes);
+	console.log(imageUrl);
 	return (
 		<Layout categories={categories.data}>
 			<Seo seo={seo} />
 			<div
 				id="banner"
-				className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-				data-src={imageUrl}
-				data-srcset={imageUrl}
-				data-uk-img={true}
+				className="w-full h-[80vh] flex flex-row justify-center content-center items-center"
+				style={headerStyle}
 			>
-				<h1>{article.attributes.title}</h1>
+				<h1 className="text-8xl font-bold uppercase text-center text-white">
+					{article.attributes.title}
+				</h1>
 			</div>
-			<div className="uk-section">
-				<div className="uk-container uk-container-small">
-					{/* <ReactMarkdown */}
-					{/* 	transformImageUri={(uri) => */}
-					{/* 		uri.startsWith("http") */}
-					{/* 			? uri */}
-					{/* 			: `${process.env.REACT_IMAGE_BASE_URL}${uri}` */}
-					{/* 	} */}
-					{/* > */}
-					{/* 	{article.attributes.content} */}
-					{/* </ReactMarkdown> */}
-					<div>{parse(article.attributes.content)}</div>
-					<hr className="uk-divider-small" />
-					<div className="uk-grid-small uk-flex-left" data-uk-grid="true">
-						<div>
-							{article.attributes.author.data.attributes.picture && (
-								<img
-									src={getStrapiMedia(
-										article.attributes.author.data.attributes.picture,
-									)}
-									alt={
-										article.attributes.author.data.attributes.picture.data
-											.attributes.alternativeText
-									}
-									style={{
-										position: "static",
-										borderRadius: "20%",
-										height: 60,
-									}}
-								/>
-							)}
-						</div>
-						<div className="uk-width-expand">
-							<p className="uk-margin-remove-bottom">
-								By {article.attributes.author.data.attributes.name}
-							</p>
-							<p className="uk-text-meta uk-margin-remove-top">
-								<Moment format="MMM Do YYYY">
-									{article.attributes.published_at}
-								</Moment>
-							</p>
-						</div>
+			<div className="container mx-auto my-5">
+				<div>{parse(article.attributes.content)}</div>
+				<hr className="my-5" />
+				<div className="flex flex-row justify-start content-center items-center gap-4">
+					<div>
+						{article.attributes.author.data.attributes.picture && (
+							<img
+								src={getStrapiMedia(
+									article.attributes.author.data.attributes.picture,
+								)}
+								alt={
+									article.attributes.author.data.attributes.picture.data
+										.attributes.alternativeText
+								}
+								style={{
+									position: "static",
+									borderRadius: "20%",
+									height: 60,
+								}}
+							/>
+						)}
+					</div>
+					<div>
+						<p className="font-bold">
+							By {article.attributes.author.data.attributes.name}
+						</p>
+						<p className="text-sm text-gray-500">
+							<Moment format="MMM Do YYYY">
+								{article.attributes.published_at}
+							</Moment>
+						</p>
 					</div>
 				</div>
 			</div>

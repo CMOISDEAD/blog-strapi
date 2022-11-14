@@ -10,14 +10,25 @@ const Category = ({ category, categories }) => {
 		metaDescription: `All ${category.attributes.name} articles`,
 	};
 
+	const isEmpty = category.attributes.articles.data.length != 0;
+
 	return (
 		<Layout categories={categories.data}>
 			<Seo seo={seo} />
-			<div className="uk-section">
-				<div className="uk-container uk-container-large">
-					<h1>{category.attributes.name}</h1>
-					<Articles articles={category.attributes.articles.data} />
-				</div>
+			<div className="container mx-auto">
+				<div class="text-sm text-gray-500 italic">Category:</div>
+				<h1 className="text-3xl font-bold capitalize">
+					{category.attributes.name}
+				</h1>
+				{isEmpty ? (
+					<div className="content my-8">
+						<Articles articles={category.attributes.articles.data} />
+					</div>
+				) : (
+					<div class="flex justify-center content-center items-center h-[60vh] w-full">
+						<p className="text-5xl font-bold uppercase">Nothing here...</p>
+					</div>
+				)}
 			</div>
 		</Layout>
 	);
