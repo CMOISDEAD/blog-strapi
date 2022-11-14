@@ -1,5 +1,6 @@
 import Moment from "react-moment";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
+import parse from "html-react-parser";
 
 import Seo from "../../components/seo";
 import Layout from "../../components/layout";
@@ -32,15 +33,16 @@ const Article = ({ article, categories }) => {
 			</div>
 			<div className="uk-section">
 				<div className="uk-container uk-container-small">
-					<ReactMarkdown
-						transformImageUri={(uri) =>
-							uri.startsWith("http")
-								? uri
-								: `${process.env.REACT_IMAGE_BASE_URL}${uri}`
-						}
-					>
-						{article.attributes.content}
-					</ReactMarkdown>
+					{/* <ReactMarkdown */}
+					{/* 	transformImageUri={(uri) => */}
+					{/* 		uri.startsWith("http") */}
+					{/* 			? uri */}
+					{/* 			: `${process.env.REACT_IMAGE_BASE_URL}${uri}` */}
+					{/* 	} */}
+					{/* > */}
+					{/* 	{article.attributes.content} */}
+					{/* </ReactMarkdown> */}
+					<div>{parse(article.attributes.content)}</div>
 					<hr className="uk-divider-small" />
 					<div className="uk-grid-small uk-flex-left" data-uk-grid="true">
 						<div>

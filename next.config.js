@@ -3,7 +3,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	images: {
 		loader: "default",
-		domains: ["strapiblog.fly.dev"],
+		domains: ["strapi-blog-mara.fly.dev"],
 	},
 };
 
